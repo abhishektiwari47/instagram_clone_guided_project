@@ -16,6 +16,7 @@ dependencies:
   firebase_storage: ^11.0.5
   flutter:
     sdk: flutter
+  flutter_svg: ^1.1.6
 
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -24,3 +25,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+   - assets/image/ic_instagram.svg
