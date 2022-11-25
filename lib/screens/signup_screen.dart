@@ -3,16 +3,18 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:instagram/utils/colors.dart';
 import 'package:instagram/widgets/text_field_input.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({Key? key}) : super(key: key);
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _SignupScreenState createState() => _SignupScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _bioController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
 
 // for disposing the password and email
   @override
@@ -20,6 +22,8 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
+    _bioController.dispose();
+    _usernameController.dispose();
   }
 
   @override
@@ -48,6 +52,14 @@ class _LoginScreenState extends State<LoginScreen> {
           SizedBox(
             height: 24,
           ),
+
+          TextFieldInput(
+              textEditingController: _usernameController,
+              hintText: 'Enter your email',
+              textInputType: TextInputType.text),
+          SizedBox(
+            height: 24,
+          ),
           //text field input for email
           TextFieldInput(
               textEditingController: _emailController,
@@ -59,10 +71,17 @@ class _LoginScreenState extends State<LoginScreen> {
           //text field input for password
           TextFieldInput(
             textEditingController: _passwordController,
-            hintText: 'Enter your email',
+            hintText: 'Enter your password',
             textInputType: TextInputType.text,
             isPass: true,
           ),
+          SizedBox(
+            height: 24,
+          ),
+          TextFieldInput(
+              textEditingController: _bioController,
+              hintText: 'Enter your email',
+              textInputType: TextInputType.text),
           SizedBox(
             height: 24,
           ),
@@ -71,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
           InkWell(
             onTap: () {},
             child: Container(
-              child: const Text('Log in'),
+              child: const Text('Create new account'),
               width: double.infinity,
               alignment: Alignment.center,
               padding: const EdgeInsets.symmetric(vertical: 12),
@@ -96,14 +115,14 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                child: Text("Don't have an account?"),
+                child: Text("Allready have an account?"),
                 padding: const EdgeInsets.symmetric(vertical: 8),
               ),
               GestureDetector(
                 onTap: () {},
                 child: Container(
                   child: const Text(
-                    " Sign Up",
+                    " Log in",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Color.fromARGB(255, 86, 179, 255),
