@@ -47,7 +47,26 @@ class _SignupScreenState extends State<SignupScreen> {
             height: 64,
           ),
           const SizedBox(
-            height: 64,
+            height: 24,
+          ),
+          //circular widget to accept and show our selected file
+
+          Stack(
+            children: [
+              CircleAvatar(
+                radius: 64,
+                backgroundImage: AssetImage('assets/image/instaAvatar.jpg'),
+              ),
+              Positioned(
+                  bottom: -10,
+                  left: 80,
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.add_a_photo,
+                    ),
+                  ))
+            ],
           ),
           SizedBox(
             height: 24,
@@ -55,7 +74,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
           TextFieldInput(
               textEditingController: _usernameController,
-              hintText: 'Enter your email',
+              hintText: 'Enter your username',
               textInputType: TextInputType.text),
           SizedBox(
             height: 24,
@@ -80,7 +99,7 @@ class _SignupScreenState extends State<SignupScreen> {
           ),
           TextFieldInput(
               textEditingController: _bioController,
-              hintText: 'Enter your email',
+              hintText: 'Enter your bio',
               textInputType: TextInputType.text),
           SizedBox(
             height: 24,
