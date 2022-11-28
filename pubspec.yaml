@@ -28,3 +28,4 @@ flutter:
 
   assets:
    - assets/image/ic_instagram.svg
+   - assets/image/instaAvatar.jpg
