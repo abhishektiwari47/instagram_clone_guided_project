@@ -59,3 +59,16 @@ for uploading image we used a firebasestorage... now one thing, in the signup_sc
                 file: _image!,
               );
             },
+
+
+for creating a snackBar we used 
+ ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(res),
+        ),
+);
+
+
+now we are going to do something for managing the users login state...
+For this we will take the help of firebase...
+while doing so an error occured because of // import 'dart:js'; the error was // The argument type 'JsObject' can't be assigned to the parameter type 'BuildContext'
