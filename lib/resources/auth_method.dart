@@ -57,6 +57,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:instagram/resources/storage_methods.dart';
 
 class AuthMethod {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -67,18 +68,19 @@ class AuthMethod {
     required String email,
     required String password,
     required String bio,
-    // required Uint8List file,
+    required Uint8List file,
   }) async {
     String res = "error";
     try {
       if (email.isNotEmpty ||
-              username.isNotEmpty ||
-              password.isNotEmpty ||
-              bio.isNotEmpty //|| file!=null
-          ) {
+          username.isNotEmpty ||
+          password.isNotEmpty ||
+          bio.isNotEmpty) {
         UserCredential cred = await _auth.createUserWithEmailAndPassword(
             email: email, password: password);
         print(cred.user!.uid);
+        String photoUrl = await StorageMethods()
+            .uploadImageToStorage('profilePics', file, false);
         await _firestore.collection('users').doc(cred.user!.uid).set({
           'username': username,
           'uid': cred.user!.uid,
@@ -86,11 +88,17 @@ class AuthMethod {
           'bio': bio,
           'followers': [],
           'following': [],
+          'photUrl': photoUrl,
         });
         res = "success";
       }
-    } catch (err) {
-      res = err.toString();
+    } on FirebaseAuthException catch (err) {
+      if (err.code == 'invalid-email') {
+        res = 'The Email you entered should be in a correct format';
+        print(res);
+      } else if (err.code == 'wrong-password') {
+        res = 'wrong password';
+      }
     }
     return res;
   }

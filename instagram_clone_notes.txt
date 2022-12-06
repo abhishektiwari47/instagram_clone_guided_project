@@ -1,0 +1,61 @@
+flutter run -d Edge(for running app in chrome from terminal)
+
+Pubspec Assist (for installing some package without opening pub dev site)
+
+Ctrl+Shift+p for Command Palette here you can use extensions.
+
+here we create changed in the storage rules in firebase...
+so that anyone can read and write in this database
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write;
+    }
+  }
+}
+
+for searching a file just use ctrl+p
+
+Dex problem can be solved by adding
+multiDexEnabled true 
+to defaultConfig to build.gradle
+
+binding problem can be solved by adding this line in the main()
+WidgetsFlutterBinding.ensureInitialized();
+
+For changing name of a flutter app package in the AndroidManifest just follow the link...
+https://stackoverflow.com/questions/51534616/how-to-change-package-name-in-flutter
+
+Web needs options in firebase.initializeApp()...
+intagram_clone: 30:10 min
+
+
+We use svg file for logo...
+there is package for svg...
+import 'package:instagram/utils/colors.dart';
+and use this for calling your SVG file after mentioning it in the assets in the pubspec.yaml
+
+he used stack and positioned for icon over the add image background
+
+
+so we tried to signup using email and password and then we simply created a class for this purpose. In a different file.
+We authenticated using firebaseAuth and we stored the user related data in db using firebaseFirestore...
+
+he used an image picker method for image selection.
+Dart.io is not used because it has some funcionalities which are not assible on the website.
+
+for image we use image_picker package
+
+
+for uploading image we used a firebasestorage... now one thing, in the signup_screen.dart we have checked for _image to be not null as it was required... (file:_image!)
+ InkWell(
+            onTap: () async {
+              String res = await AuthMethod().signUpUser(
+                username: _usernameController.text,
+                email: _emailController.text,
+                password: _passwordController.text,
+                bio: _bioController.text,
+                file: _image!,
+              );
+            },

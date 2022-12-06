@@ -21,6 +21,7 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _bioController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   Uint8List? _image;
+  bool _isLoading = false;
 
 // for disposing the password and email
   @override
@@ -37,6 +38,19 @@ class _SignupScreenState extends State<SignupScreen> {
     setState(() {
       _image = im;
     });
+  }
+
+  void signUpUser() async {
+    setState(() {
+      _isLoading = true;
+    });
+    String res = await AuthMethod().signUpUser(
+      username: _usernameController.text,
+      email: _emailController.text,
+      password: _passwordController.text,
+      bio: _bioController.text,
+      file: _image!,
+    );
   }
 
   @override
@@ -126,16 +140,13 @@ class _SignupScreenState extends State<SignupScreen> {
 
           //button signup
           InkWell(
-            onTap: () async {
-              String res = await AuthMethod().signUpUser(
-                username: _usernameController.text,
-                email: _emailController.text,
-                password: _passwordController.text,
-                bio: _bioController.text,
-              );
-            },
+            onTap: signUpUser,
             child: Container(
-              child: const Text('Create new account'),
+              child: _isLoading
+                  ? const CircularProgressIndicator(
+                      color: Colors.white,
+                    )
+                  : const Text('Create new account'),
               width: double.infinity,
               alignment: Alignment.center,
               padding: const EdgeInsets.symmetric(vertical: 12),
